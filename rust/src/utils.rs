@@ -246,6 +246,13 @@ impl BigNum {
         }
     }
 
+    pub fn checked_div(&self, other: &BigNum) -> Result<BigNum, JsError> {
+        match self.0.checked_div(other.0) {
+            Some(value) => Ok(BigNum(value)),
+            None => Err(JsError::from_str("divide by 0 error")),
+        }
+    }
+
     pub fn checked_add(&self, other: &BigNum) -> Result<BigNum, JsError> {
         match self.0.checked_add(other.0) {
             Some(value) => Ok(BigNum(value)),

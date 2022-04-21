@@ -441,7 +441,9 @@ impl TransactionBuilderConfigBuilder {
             prefer_split_change: cfg.prefer_split_change,
             collateral_amount: cfg.collateral_amount,
             min_split_amount_ada: cfg.min_split_amount_ada,
-            native_asset_chunk_size: cfg.native_asset_chunk_size,
+            native_asset_chunk_size: cfg
+                .native_asset_chunk_size
+                .ok_or(JsError::from_str("uninitialized field: max_value_size"))?,
         })
     }
 }
