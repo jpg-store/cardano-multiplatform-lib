@@ -1952,11 +1952,11 @@ impl TransactionBuilder {
                         }
 
                         //deal with change left before exiting if statement
-                        if !change_left.is_zero() {
+                        if !change_left.clone().is_zero() {
                             change_left = change_left.checked_sub(&change_left)?;
                             let leftover_output = TransactionOutput {
                                 address: address.clone(),
-                                amount: change_left,
+                                amount: Value::new(&change_left.coin),
                                 datum: datum.clone(),
                                 script_ref: script_ref.clone(),
                             };
